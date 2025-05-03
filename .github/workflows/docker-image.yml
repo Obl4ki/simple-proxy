@@ -2,9 +2,9 @@ name: Build and Push Docker Image to GHCR
 
 on:
   push:
-    # branches:
-      # - main
-  # workflow_dispatch:
+    branches:
+      - main
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -38,6 +38,4 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: |
-            latest
-            ${{ github.sha }}
+          tags: ${{ steps.meta.outputs.tags }}
